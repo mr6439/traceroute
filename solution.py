@@ -83,7 +83,7 @@ def get_route(hostname):
 
     for ttl in range(1, MAX_HOPS):
         for tries in range(TRIES):
-            destAddr = socket.gethostbyname(hostname)
+            destAddr =  gethostbyname(hostname)
             tracelist1 = []
             tracelist2.append(tracelist1)
             icmp = socket.getprotobyname("icmp")
