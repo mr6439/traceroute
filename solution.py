@@ -138,8 +138,8 @@ def get_route(hostname):
                     timeLeft = timeLeft - howLongInSelect
                 
                    if timeLeft <= 0:
-                         print("*    *    * 2 Request timed out.")
-                         tracelist1.append("*    *    * Request timed out.")
+                        print("*    *    * 2 Request timed out.")
+                        tracelist1.append("*    *    * Request timed out.")
                                   
                 except socket.timeout:
                     continue
