@@ -120,6 +120,31 @@ def get_route(hostname):
                 icmpHeader = recvPacket[20:28]
                 request_type, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmpHeader)
                 print(request_type)
+                try:
+                    d = build_packet()
+                    mySocket.sendto(d, (hostname, 0))
+                    t = time.time()
+                    startedSelect = time.time()
+                    whatReady = select.select([mySocket], [], [], timeLeft)
+                    howLongInSelect = (time.time() - startedSelect)
+
+                 
+                    if whatReady[0] == []:
+                        print("*    *    * 1 Request timed out.")
+                        tracelist1.append("*    *    * Request timed out.")
+                    tracelist1.append(whatReady[0])
+                    recvPacket, addr = mySocket.recvfrom(1024)
+                    timeReceived = time.time()
+                    timeLeft = timeLeft - howLongInSelect
+                
+                   if timeLeft <= 0:
+                         print("*    *    * 2 Request timed out.")
+                         tracelist1.append("*    *    * Request timed out.")
+                                  
+                except socket.timeout:
+                    continue
+
+                
                 if request_type == 11:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
