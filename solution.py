@@ -19,6 +19,7 @@ def checksum(string):
     
     str_ = bytearray(string)
     csum = 0
+    count = 0
     countTo = (len(string) // 2) * 2
 
     while count < countTo:
