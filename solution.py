@@ -23,7 +23,7 @@ def checksum(string):
     while count < countTo:
         thisVal = (string[count + 1]) * 256 + (string[count])
         csum += thisVal
-        csum &= 0xffffffff
+        csum = csum & 0xffffffff
         count += 2
 
     if countTo < len(string):
